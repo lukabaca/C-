@@ -43,9 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlyingToy.cs" />
+    <Compile Include="GroundToy.cs" />
+    <Compile Include="IFlyingToy.cs" />
+    <Compile Include="IGroundToy.cs" />
+    <Compile Include="IWaterToy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Zabawka.cs" />
+    <Compile Include="Toy.cs" />
+    <Compile Include="WaterToy.cs" />
+    <Compile Include=".cs" />
     <Compile Include="ToyRoom.cs" />
   </ItemGroup>
   <ItemGroup>

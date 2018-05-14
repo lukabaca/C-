@@ -17,14 +17,16 @@ namespace pokojZabawek
 
         private static double maksymalnaWartoscZabawekWpokoju = 10;
 
-       
+        public delegate void PrzekroczonaLiczbaZabawek();
+        public delegate void PrzekroczonaWartoscZabawek();
+
         public event PrzekroczonaLiczbaZabawek PrzyPrzekroczeniuLiczbyZabawek;
 
         public event PrzekroczonaWartoscZabawek PrzyPrzekroczeniuWartosciZabawek;
 
 
 
-        List<Zabawka> listaZabawek = new List<Zabawka>();
+        List<Toy> listaZabawek = new List<Toy>();
 
         private void przekroczonaLiczbaZabawekKomunikat()
         {
@@ -46,9 +48,9 @@ namespace pokojZabawek
         private double zwrocWartoscZabawekWPokoju()
         {
             double wartoscCalkowita = 0;
-            foreach (Zabawka zabawka in listaZabawek)
+            foreach (Toy toy in listaZabawek)
             {
-                    wartoscCalkowita += zabawka.WartoscAktualna;
+                    wartoscCalkowita += toy.WartoscAktualna;
             }
             return wartoscCalkowita;
         }
@@ -71,7 +73,7 @@ namespace pokojZabawek
                 PrzyPrzekroczeniuWartosciZabawek();
             }
         }
-        public void dodajZabawke(Zabawka zabawka)
+        public void dodajZabawke(Toy toy)
         {
             if (aktualnaLiczbaZabawek >= maksymalnaLiczbaZabawek)
             {
@@ -80,7 +82,7 @@ namespace pokojZabawek
             
             else
             {
-                listaZabawek.Add(zabawka);
+                listaZabawek.Add(toy);
                 aktualnaLiczbaZabawek++;
                 if(zwrocWartoscZabawekWPokoju() >= maksymalnaWartoscZabawekWpokoju)
                 {
@@ -88,38 +90,39 @@ namespace pokojZabawek
                 }
             }
         }
-        public void zmienSzybkosc(int szybkosc)
-        {
-            foreach (Zabawka zabawka in listaZabawek)
-            {
-                zabawka.Szybkosc = szybkosc;
-            }
-        }
-
-        public void zmienWysokosc(int wysokosc)
-        {
-            foreach (Zabawka zabawka in listaZabawek)
-            {
-                zabawka.Wysokosc = wysokosc;
-            }
-        }
-
-        public void zmienGlebokosc(int glebokosc)
-        {
-            foreach (Zabawka zabawka in listaZabawek)
-            {
-                zabawka.Glebokosc = glebokosc;
-            }
-        }
+      
 
         public void wyswietlPokoj()
         {
-            foreach (Zabawka zabawka in listaZabawek)
+            foreach (Toy toy in listaZabawek)
             {
-                Console.WriteLine("Szybkosc zabawki: " + zabawka.Szybkosc + " Wysokosc zabawki: " + zabawka.Wysokosc + " Glebokosc zabawki: " + zabawka.Glebokosc + " Obecnie zabawek: " + aktualnaLiczbaZabawek + "/" + maksymalnaLiczbaZabawek);
-                Console.WriteLine("Wartosc zabawki: " + zabawka.WartoscAktualna);
+                toy.showToyInfo();
             }
 
+        }
+
+        public void changeSpeedForAll(int speed)
+        {
+            foreach(Toy toy in listaZabawek)
+            {
+                if(toy is IFlyingToy)
+                {
+                    ((FlyingToy)toy).changeSpeed(speed);
+                }
+            }
+        }
+
+        
+
+        public void changeDepthForAll(int depth)
+        {
+            foreach (Toy toy in listaZabawek)
+            {
+                if (toy is IWaterToy)
+                {
+                    ((IWaterToy)toy).changeDepth(depth);
+                }
+            }
         }
 
     }

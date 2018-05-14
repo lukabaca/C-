@@ -4,3 +4,9 @@ D:\Studia\VI semestr\C#\pokojZabawek\pokojZabawek\bin\Debug\pokojZabawek.pdb
 D:\Studia\VI semestr\C#\pokojZabawek\pokojZabawek\obj\Debug\pokojZabawek.exe
 D:\Studia\VI semestr\C#\pokojZabawek\pokojZabawek\obj\Debug\pokojZabawek.pdb
 D:\Studia\VI semestr\C#\pokojZabawek\pokojZabawek\obj\Debug\pokojZabawek.csprojResolveAssemblyReference.cache
+D:\Studia\VIsemestr\C#\pokojZabawek\pokojZabawek\bin\Debug\pokojZabawek.exe.config
+D:\Studia\VIsemestr\C#\pokojZabawek\pokojZabawek\obj\Debug\pokojZabawek.exe
+D:\Studia\VIsemestr\C#\pokojZabawek\pokojZabawek\obj\Debug\pokojZabawek.pdb
+D:\Studia\VIsemestr\C#\pokojZabawek\pokojZabawek\bin\Debug\pokojZabawek.exe
+D:\Studia\VIsemestr\C#\pokojZabawek\pokojZabawek\bin\Debug\pokojZabawek.pdb
+D:\Studia\VIsemestr\C#\pokojZabawek\pokojZabawek\obj\Debug\pokojZabawek.csprojResolveAssemblyReference.cache

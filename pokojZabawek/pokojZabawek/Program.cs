@@ -9,51 +9,33 @@ namespace pokojZabawek
 {
     class Program
     {
-       
+        
         static void Main(string[] args)
         {
 
 
-            /*
-            Zabawka zabawka1 = new Zabawka(2, 3, 4);
-
-            PokojZabawek pokojZabawek = new PokojZabawek();
-
-            pokojZabawek.dodajZabawke(zabawka1);
-
-            pokojZabawek.wyswietlPokoj();
-
-            pokojZabawek.zmienSzybkosc(69);
-
-            pokojZabawek.wyswietlPokoj();
-            */
-
-            /*
-            Wartosc test = new Wartosc(3, 3);
-            test.WartoscSentymentalna = -1;
-
-            Zabawka zabawka2 = new Zabawka(1, 1, 1, test);
-            zabawka2.Wiek = 3;
-
-            Console.Write("Wartosc aktualna: " + zabawka2.WartoscAktualna);
-            */
+           
 
             Wartosc wartosc = new Wartosc(1, 4);
 
-            Zabawka zabawka1 = new Zabawka(2, 3, 4, 2, new Wartosc(3, 1));
-            Zabawka zabawka2 = new Zabawka(3, 1, 3, 1, wartosc);
+            FlyingToy samolot = new FlyingToy(3, 5, 10, wartosc);
+            WaterToy zaglowka = new WaterToy(9, 1, wartosc);
+            GroundToy mis = new GroundToy(50, wartosc);
+            //samolot.showToyInfo();
 
             PokojZabawek pokojZabawek = new PokojZabawek();
-          
+
+            //samolot.showToyInfo();
 
             //pokojZabawek.PrzyPrzekroczeniuLiczbyZabawek += new PokojZabawek.PrzekroczonaLiczbaZabawek(wyswietlInformacje);
 
-            pokojZabawek.dodajZabawke(zabawka1);
+            pokojZabawek.dodajZabawke(samolot);
+            pokojZabawek.dodajZabawke(zaglowka);
+            //pokojZabawek.dodajZabawke(mis);
 
             pokojZabawek.wyswietlPokoj();
 
-            pokojZabawek.dodajZabawke(zabawka2);
-
+            pokojZabawek.changeDepthForAll(666);
             pokojZabawek.wyswietlPokoj();
 
             
