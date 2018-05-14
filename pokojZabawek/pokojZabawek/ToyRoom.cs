@@ -10,7 +10,7 @@ namespace pokojZabawek
 
 
 
-    class PokojZabawek
+    class ToyRoom
     {
         private static int maksymalnaLiczbaZabawek = 3;
         private static int aktualnaLiczbaZabawek = 0;
