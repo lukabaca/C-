@@ -10,7 +10,7 @@ namespace pokojZabawek
 {
     class Program
     {
-        private static void test1()
+        private static void test1(ToyRoom toyRoom)
         {
             Wartosc wartosc = new Wartosc(1, 4);
 
@@ -19,36 +19,35 @@ namespace pokojZabawek
             GroundToy mis = new GroundToy(50, wartosc);
             //samolot.showToyInfo();
 
-            ToyRoom pokojZabawek = new ToyRoom();
-
-            //samolot.showToyInfo();
-
-            //pokojZabawek.PrzyPrzekroczeniuLiczbyZabawek += new PokojZabawek.PrzekroczonaLiczbaZabawek(wyswietlInformacje);
-
-            pokojZabawek.dodajZabawke(samolot);
-            pokojZabawek.dodajZabawke(zaglowka);
+            
+            toyRoom.dodajZabawke(samolot);
+            toyRoom.dodajZabawke(zaglowka);
             //pokojZabawek.dodajZabawke(mis);
 
-            pokojZabawek.wyswietlPokoj();
+            toyRoom.wyswietlPokoj();
 
-            pokojZabawek.changeDepthForAll(666);
-            pokojZabawek.wyswietlPokoj();
+            toyRoom.changeDepthForAll(666);
+            toyRoom.wyswietlPokoj();
 
             Console.WriteLine("Koniec testu 1");
             Console.WriteLine("---------------------------------");
         }
 
-        private static void test2()
+        private static void test2(ToyRoom toyRoom)
         {
             Wartosc wartosc = new Wartosc(3, 5);
 
             FlyingToy samolot = new FlyingToy(3, 5, 10, wartosc);
 
-            ToyRoom pokojZabawek = new ToyRoom();
+           
 
-            pokojZabawek.dodajZabawke(samolot);
+            for (int i = 0; i < 10; i++)
+            {
+                toyRoom.dodajZabawke(samolot);
+            }
 
-            pokojZabawek.wyswietlPokoj();
+            toyRoom.wyswietlPokoj();
+            
 
             Console.WriteLine("Wartosc aktualna zabawki: " + samolot.WartoscAktualna);
 
@@ -56,11 +55,19 @@ namespace pokojZabawek
             Console.WriteLine("---------------------------------");
         }
 
-        private static void test3()
+        private static void test3(ToyRoom toyRoom)
         {
-            ToyRoom pokojZabawek = new ToyRoom();
-            pokojZabawek.wyswietlPokoj();
+            
+            Wartosc wartosc = new Wartosc(3, 5);
+            FlyingToy samolot = new FlyingToy(2, 3, 5, wartosc);
 
+            for(int i = 0; i < 10; i++)
+            {
+                toyRoom.dodajZabawke(samolot);
+                
+            }
+            toyRoom.wyswietlPokoj();
+            toyRoom.changeSpeedForAll(50);
 
             Console.WriteLine("Koniec testu 3");
             Console.WriteLine("---------------------------------");
@@ -68,15 +75,23 @@ namespace pokojZabawek
 
         static void Main(string[] args)
         {
-            Thread thread1 = new Thread(test1);
-            Thread thread2 = new Thread(test2);
-            Thread thread3 = new Thread(test3);
+            ToyRoom toyRoom = new ToyRoom();
+
+            Thread thread1 = new Thread(() => test1(toyRoom));
+            Thread thread2 = new Thread(() => test2(toyRoom));
+            Thread thread3 = new Thread(() => test3(toyRoom));
 
 
 
             thread1.Start();
             thread2.Start();
             thread3.Start();
+
+            
+            thread1.Join();
+            thread2.Join();
+            thread3.Join();
+            
 
             Console.ReadLine();
         }

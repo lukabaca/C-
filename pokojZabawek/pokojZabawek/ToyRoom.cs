@@ -12,10 +12,10 @@ namespace pokojZabawek
 
     class ToyRoom
     {
-        private static int maksymalnaLiczbaZabawek = 3;
+        private static int maksymalnaLiczbaZabawek = 50;
         private static int aktualnaLiczbaZabawek = 0;
 
-        private static double maksymalnaWartoscZabawekWpokoju = 10;
+        private static double maksymalnaWartoscZabawekWpokoju = 20;
 
         public delegate void PrzekroczonaLiczbaZabawek();
         public delegate void PrzekroczonaWartoscZabawek();
@@ -24,7 +24,7 @@ namespace pokojZabawek
 
         public event PrzekroczonaWartoscZabawek PrzyPrzekroczeniuWartosciZabawek;
 
-
+        private static System.Threading.Mutex mutex = new System.Threading.Mutex();
 
         List<Toy> listaZabawek = new List<Toy>();
 
@@ -39,11 +39,15 @@ namespace pokojZabawek
         }
         private void usunOstatniaZabawke()
         {
+            mutex.WaitOne();
             int i = 0;
             int iloscZabawek = listaZabawek.Count;
-            listaZabawek.RemoveAt(iloscZabawek - 1);
-            aktualnaLiczbaZabawek--;
-            
+            if (iloscZabawek > 0)
+            {
+                listaZabawek.RemoveAt(iloscZabawek - 1);
+                aktualnaLiczbaZabawek--;
+            }
+            mutex.ReleaseMutex();
         }
         private double zwrocWartoscZabawekWPokoju()
         {
@@ -75,6 +79,7 @@ namespace pokojZabawek
         }
         public void dodajZabawke(Toy toy)
         {
+            mutex.WaitOne();
             if (aktualnaLiczbaZabawek >= maksymalnaLiczbaZabawek)
             {
                 przekroczonaLiczbaZabawekObsluga();
@@ -89,33 +94,39 @@ namespace pokojZabawek
                     przekroczonaWartoscZabawekObsluga();
                 }
             }
+
+            mutex.ReleaseMutex();
         }
       
 
         public void wyswietlPokoj()
         {
+            mutex.WaitOne();
             foreach (Toy toy in listaZabawek)
             {
                 toy.showToyInfo();
             }
-
+            mutex.ReleaseMutex();
         }
 
         public void changeSpeedForAll(int speed)
         {
-            foreach(Toy toy in listaZabawek)
+            mutex.WaitOne();
+            foreach (Toy toy in listaZabawek)
             {
                 if(toy is IFlyingToy)
                 {
                     ((FlyingToy)toy).changeSpeed(speed);
                 }
             }
+            mutex.ReleaseMutex();
         }
 
         
 
         public void changeDepthForAll(int depth)
         {
+            mutex.WaitOne();
             foreach (Toy toy in listaZabawek)
             {
                 if (toy is IWaterToy)
@@ -123,6 +134,7 @@ namespace pokojZabawek
                     ((IWaterToy)toy).changeDepth(depth);
                 }
             }
+            mutex.ReleaseMutex();
         }
 
     }
